@@ -12,10 +12,11 @@ class TranscriptEndpoint
     protected ?string $languageModel = null;
     protected bool $formatText = true;
     protected bool $punctuate = true;
-    protected bool $dualChannel = true;
+    protected bool $dualChannel = false;
     protected ?string $webhookUrl = null;
     protected ?int $audioStartFrom = null;
     protected ?int $audioEndAt = null;
+    protected bool $speakerLabels = true;
 
     public function __construct(
         protected Api $api
@@ -69,9 +70,10 @@ class TranscriptEndpoint
         return $this->startFrom($from)->endAt($to);
     }
 
-    public function create(string $audioUrl): Transcript
+    public function create(string $audioUrl, bool $speakerLabels = true): Transcript
     {
         $this->audioUrl = $audioUrl;
+        $this->speakerLabels = $speakerLabels;
 
         $response = $this->api->post("transcript", $this->query())->json();
 
@@ -97,6 +99,7 @@ class TranscriptEndpoint
             'webhook_url' => $this->webhookUrl,
             'audio_start_from' => $this->audioStartFrom,
             'audio_end_at' => $this->audioEndAt,
+            'speaker_labels' => $this->speakerLabels,
         ])->whereNotNull()->toArray();
     }
 }
