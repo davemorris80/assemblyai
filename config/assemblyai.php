@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'token' => env('ASSEMBLYAI_TOKEN'),
+    'token' => env('ASSEMBLYAI_API_KEY'),
 ];
