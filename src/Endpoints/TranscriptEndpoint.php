@@ -70,10 +70,11 @@ class TranscriptEndpoint
         return $this->startFrom($from)->endAt($to);
     }
 
-    public function create(string $audioUrl, bool $speakerLabels = true): Transcript
+    public function create(string $audioUrl, string $webhookUrl = null, bool $speakerLabels = true): Transcript
     {
         $this->audioUrl = $audioUrl;
         $this->speakerLabels = $speakerLabels;
+        $this->webhookUrl = $webhookUrl;
 
         $response = $this->api->post("transcript", $this->query())->json();
 
