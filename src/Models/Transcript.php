@@ -27,6 +27,7 @@ class Transcript
         public ?string $error = null,
         public ?bool $speed_boost = null,
         public ?bool $speaker_labels = null,
+        public ?bool $language_detection = null,
         ...$arguments
     ) {
     }
